@@ -3,6 +3,7 @@ package web;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -10,12 +11,21 @@ public class MainPageTest extends TestBase {
 
     @Test
     void openAboutCompanyPageTest() {
-
         mainPage.openPage();
         $("#block-views-specialone-latest-news-block").shouldHave(text("Последние новости"));
         $(".navbar-inner").$(byText("О Компании")).click();
         $("#main-content").shouldHave(text("О компании"));
     }
+
+    @Test
+    void returnToMainPageTest() {
+        mainPage.openPage();
+        $("#block-views-specialone-latest-news-block").shouldHave(text("Последние новости"));
+        $(".navbar-inner").$(byText("О Компании")).click();
+        $("#main-content").shouldHave(text("О компании"));
+        $("#logo").$(byLinkText("https://www.red-soft.ru:443/sites/all/themes/specialone/logo.png")).click();
+    }
+
 
     @Test
     void searchTextTest() {
